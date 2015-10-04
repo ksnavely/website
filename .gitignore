@@ -60,3 +60,4 @@ venv/
 *.swo
 *.swp
 *.pyc
+*.vagrant

@@ -1,0 +1,28 @@
+---
+- hosts: all
+  sudo: yes
+  vars:
+    - git_email: "ksnavely@gmail.com"
+
+  tasks:
+    # OS stuff
+    # nginx
+    # build website
+
+    - name: Update apt-cache
+      apt: update_cache=yes
+      sudo: yes
+
+    - name: Install deps
+      apt: name={{ item }} state=latest update_cache=yes
+      with_items:
+        - build-essential
+        - git
+        - vim
+        - libssl1.0.0
+        - libssl-dev
+        - tmux
+        - python-pip
+        - python-dev
+        - iotop
+      sudo: yes

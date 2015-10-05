@@ -24,26 +24,22 @@
         - python-pip
         - python-dev
         - iotop
-        - nginx=1.2.1*
+        - nginx=1.4.6*
         - runit=2.1.1*
 
     - name: Push the nginx config
       template: src=templates/nginx.conf dest=/etc/nginx/nginx.conf
 
-    - name: Allow Ansible git module to clone repositories
+    - name: website user
+      user: name=website
+
+    - name: Set website srv as website user
       file:
         state=directory
         mode=0755
         dest=/srv/website
-        owner=vagrant
-        group=vagrant
-
-    - name: Grab the git repo
-      git: repo=git@github.com:ksnavely/website.git 
-           dest=/srv/website
-           clone=yes
-           accept_hostkey=yes
-      sudo: no
+        owner=website
+        group=website
 
     - name: Get virtualenv
       pip: name=virtualenv
@@ -51,14 +47,6 @@
     - pip:
            virtualenv=/srv/website/venv
            requirements=/srv/website/website/requirements.txt
-
-    - name: Allow Ansible git module to clone repositories
-      file:
-        state=directory
-        mode=0755
-        dest=/srv/website
-        owner=vagrant
-        group=vagrant
 
     - name: Setup symlinks for runit in general
       file:

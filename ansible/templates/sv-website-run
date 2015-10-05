@@ -1,4 +1,4 @@
 #!/bin/bash
 cd /srv/website
 . venv/bin/activate
-python -m server
+python -m website

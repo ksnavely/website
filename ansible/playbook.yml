@@ -11,10 +11,9 @@
 
     - name: Update apt-cache
       apt: update_cache=yes
-      sudo: yes
 
     - name: Install deps
-      apt: name={{ item }} state=latest update_cache=yes
+      apt: name={{ item }} update_cache=yes
       with_items:
         - build-essential
         - git
@@ -25,4 +24,32 @@
         - python-pip
         - python-dev
         - iotop
-      sudo: yes
+        - nginx=1.2.1*
+        - runit=2.1.1*
+
+    - name: Push the nginx config
+      template: src=templates/nginx.conf dest=/etc/nginx/nginx.conf
+
+    - name: Allow Ansible git module to clone repositories
+      file:
+        state=directory
+        mode=0755
+        dest=/srv/website
+        owner=vagrant
+        group=vagrant
+
+    - name: Grab the git repo
+      git: repo=git@github.com:ksnavely/website.git 
+           dest=/srv/website
+           clone=yes
+           update=no
+           accept_hostkey=yes
+      sudo: no
+
+    - name: Get virtualenv
+      pip: virtualenv
+
+    - pip:
+           virtualenv=/srv/website/venv
+           requirements=/srv/website/website/requirements.txt
+

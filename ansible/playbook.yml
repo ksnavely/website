@@ -42,14 +42,43 @@
       git: repo=git@github.com:ksnavely/website.git 
            dest=/srv/website
            clone=yes
-           update=no
            accept_hostkey=yes
       sudo: no
 
     - name: Get virtualenv
-      pip: virtualenv
+      pip: name=virtualenv
 
     - pip:
            virtualenv=/srv/website/venv
            requirements=/srv/website/website/requirements.txt
 
+    - name: Allow Ansible git module to clone repositories
+      file:
+        state=directory
+        mode=0755
+        dest=/srv/website
+        owner=vagrant
+        group=vagrant
+
+    - name: Setup symlinks for runit in general
+      file:
+        state=link
+        src=/etc/service
+        dest=/service
+
+    - name: Setup website sv dir
+      file:
+        state=directory
+        dest=/etc/sv/website
+
+    - name: Setup website runit service
+      template:
+        src=templates/sv-website-run
+        dest=/etc/sv/website/run
+        mode=u+rwx
+
+    - name: Setup symlinks for runit for the website
+      file:
+        state=link
+        src=/etc/sv/website
+        dest=/service/website

@@ -71,14 +71,53 @@
         state=directory
         dest=/etc/sv/website
 
+    - name: Setup website sv log dir
+      file:
+        state=directory
+        dest=/etc/sv/website/log/main
+
     - name: Setup website runit service
       template:
         src=templates/sv-website-run
         dest=/etc/sv/website/run
         mode=u+rwx
 
+    - name: Setup website runit log service
+      template:
+        src=templates/sv-website-log-run
+        dest=/etc/sv/website/log/run
+        mode=u+rwx
+
     - name: Setup symlinks for runit for the website
       file:
         state=link
         src=/etc/sv/website
-        dest=/service/website
+        dest=/etc/service/website
+
+    - name: Setup nginx sv dir
+      file:
+        state=directory
+        dest=/etc/sv/nginx
+
+    - name: Setup nginx sv log dir
+      file:
+        state=directory
+        dest=/etc/sv/nginx/log/main
+
+    - name: Setup nginx runit service
+      template:
+        src=templates/sv-nginx-run
+        dest=/etc/sv/nginx/run
+        mode=u+rwx
+
+    - name: Setup nginx runit log service
+      template:
+        src=templates/sv-nginx-log-run
+        dest=/etc/sv/nginx/log/run
+        mode=u+rwx
+
+    - name: Setup symlinks for runit for the website
+      file:
+        state=link
+        src=/etc/sv/nginx
+        dest=/etc/service/nginx

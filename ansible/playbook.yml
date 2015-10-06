@@ -16,6 +16,8 @@
       apt: name={{ item }} update_cache=yes
       with_items:
         - build-essential
+        - curl
+        - lsof
         - git
         - vim
         - libssl1.0.0
@@ -29,6 +31,12 @@
 
     - name: Push the nginx config
       template: src=templates/nginx.conf dest=/etc/nginx/nginx.conf
+
+    - name: Needed for runit
+      template: 
+        src=templates/docker_start.sh 
+        dest=/srv/website/docker_start.sh
+        mode=u+rwx
 
     - name: website user
       user: name=website
@@ -57,7 +65,7 @@
     - name: Setup website sv dir
       file:
         state=directory
-        dest=/etc/sv/website
+        dest=/etc/sv/website/supervise
 
     - name: Setup website sv log dir
       file:
@@ -85,7 +93,7 @@
     - name: Setup nginx sv dir
       file:
         state=directory
-        dest=/etc/sv/nginx
+        dest=/etc/sv/nginx/supervise
 
     - name: Setup nginx sv log dir
       file:

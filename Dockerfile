@@ -6,8 +6,8 @@ ADD website /srv/website/website
 ADD ansible /srv/ansible
 WORKDIR /srv/ansible
 
-RUN ansible-playbook playbook.yml -c local
+RUN ansible-playbook playbook.yml -c local -v
 
-EXPOSE 22 80
+EXPOSE 22 80 5000
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/srv/website/docker_start.sh"]

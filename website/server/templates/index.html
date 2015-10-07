@@ -1,21 +1,53 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
     <title>Kyle Snavely</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/jquery-ui-1.10.3.custom.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/style.css') }}">
+
+    <script type="text/javascript" src="{{ url_for('static',filename='js/Libraries/jquery-1.9.1.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/Libraries/jquery-ui-1.10.3.custom.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/Libraries/underscore.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/Libraries/backbone.js') }}"></script>
+
   </head>
+
   <body>
-      <div style="margin:0 auto; text-align:center; width: 800px; height: 600px; border: 1px solid black;">
-          <div style="display: block; height: 80px; border-bottom: 1px solid black">
-              Kyle Snavely
-          </div>
-          <div style="display: block; height: 520px">
-          <div style="width: 530px; float: left; border-right: 1px solid black; height: 100%; position: relative;">
-              Photo
-          </div>
-          <div style="display: inline-block; text-align:center">
-          GitHub<br />
-          LinkdIn<br />
-          </div>
-          </div>
+
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="">Kyle Snavely</a>
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact/Bugs</a></li>
+          </ul>
+          <p class="pull-right">Powered by <a href="http://www.docker.com/">Docker</a>, <a href="http://www.ansible.com/">Ansible</a>, <a href="http://nginx.org/en/">Nginx</a>, and <a href="http://flask.pocoo.org/">Flask</a></p>
+        </div>
       </div>
+    </div>
+
+      <div class="content">
+        <div class="main_content">
+          <div id="page_area" class="page_area" style="margin: 0 auto;"> 
+            <div style="width: 33%; display: inline-block;"><a href="https://github.com/ksnavely"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/octocat.png') }}" /></a></div>
+            <div style="width: 33%; display: inline-block; margin: 0 auto;"><a href="https://hub.docker.com/u/ksnavely/"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/dockerhub.png') }}" /></a></div>
+            <div style="width: 33%; display: inline-block; margin: 0 auto;"><a href="https://www.linkedin.com/pub/kyle-snavely/70/882/37"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/linkdin.png') }}" /></a></div>
+          </div>
+        </div>
+
+        <footer style="border: none">
+          <center>
+          <p>&copy; Kyle Snavely 2015</p>
+          </center>
+        </footer>
+      </div> <!-- End content div -->
+    </div>
+    <div id="mj-progress-div"></div>
   </body>
 </html>

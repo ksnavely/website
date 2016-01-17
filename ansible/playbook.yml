@@ -29,15 +29,6 @@
         - nginx=1.4.6*
         - runit=2.1.1*
 
-    - name: Push the nginx config
-      template: src=templates/nginx.conf dest=/etc/nginx/nginx.conf
-
-    - name: Needed for runit
-      template:
-        src=templates/docker_start.sh
-        dest=/srv/website/docker_start.sh
-        mode=u+rwx
-
     - name: website user
       user: name=website
 
@@ -48,6 +39,15 @@
         dest=/srv/website
         owner=website
         group=website
+
+    - name: Push the nginx config
+      template: src=templates/nginx.conf dest=/etc/nginx/nginx.conf
+
+    - name: Needed for runit
+      template:
+        src=templates/docker_start.sh
+        dest=/srv/website/docker_start.sh
+        mode=u+rwx
 
     - name: Get virtualenv
       pip: name=virtualenv

@@ -1,0 +1,16 @@
+boot2docker up
+boot2docker ssh
+docker build -t practice .
+docker run -name practice_inst -t practice
+docker ps
+docker exec -i -t 3e0abf2a65d1 bash
+vim /etc/nginx/nginx.conf
+curl http://0.0.0.0:80
+port forwarding for boot2docker
+boot2docker ip?
+lol just run the flask app:
+  - python -m website
+  - http://127.0.0.1:5000/rockfall
+
+- ansible git clone the latest rockfall
+- nginx static backend to rockfall clone on /rockfall

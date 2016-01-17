@@ -33,8 +33,8 @@
       template: src=templates/nginx.conf dest=/etc/nginx/nginx.conf
 
     - name: Needed for runit
-      template: 
-        src=templates/docker_start.sh 
+      template:
+        src=templates/docker_start.sh
         dest=/srv/website/docker_start.sh
         mode=u+rwx
 
@@ -117,3 +117,8 @@
         state=link
         src=/etc/sv/nginx
         dest=/etc/service/nginx
+
+    - name: Install Rockfall
+      git:
+        repo=https://github.com/ksnavely/rockfall.git
+        dest=/srv/rockfall

@@ -28,12 +28,5 @@ def index():
     """
     return render_template('index.html')
 
-@app.route('/rockfall')
-def rockfall():
-    """
-    Returns Rockfall game
-    """
-    return render_template('rockfall.html')
-
 if __name__ == "__main__":
     app.run()

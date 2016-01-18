@@ -26,7 +26,7 @@
         - python-pip
         - python-dev
         - iotop
-        - nginx=1.4.6-1ubuntu3.5
+        - nginx=1.4.6-1ubuntu3.3
         - runit=2.1.1-6.2ubuntu3
 
     - name: website user

@@ -26,8 +26,8 @@
         - python-pip
         - python-dev
         - iotop
-        - nginx=1.4.6*
-        - runit=2.1.1*
+        - nginx=1.4.6-1ubuntu3.5
+        - runit=2.1.1-6.2ubuntu3
 
     - name: website user
       user: name=website
@@ -47,7 +47,7 @@
       template:
         src=templates/docker_start.sh
         dest=/srv/website/docker_start.sh
-        mode=u+rwx
+        mode=0764
 
     - name: Get virtualenv
       pip: name=virtualenv
@@ -76,13 +76,13 @@
       template:
         src=templates/sv-website-run
         dest=/etc/sv/website/run
-        mode=u+rwx
+        mode=0764
 
     - name: Setup website runit log service
       template:
         src=templates/sv-website-log-run
         dest=/etc/sv/website/log/run
-        mode=u+rwx
+        mode=0764
 
     - name: Setup symlinks for runit for the website
       file:
@@ -104,13 +104,13 @@
       template:
         src=templates/sv-nginx-run
         dest=/etc/sv/nginx/run
-        mode=u+rwx
+        mode=0764
 
     - name: Setup nginx runit log service
       template:
         src=templates/sv-nginx-log-run
         dest=/etc/sv/nginx/log/run
-        mode=u+rwx
+        mode=0764
 
     - name: Setup symlinks for runit for the website
       file:

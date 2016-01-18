@@ -9,4 +9,4 @@ sudo ln -s /home/ubuntu/website/website /srv/website/website
 set modes to 06400
 perms are off, set to 0764
 turned off some default nginx noise? sv stop, fix, sv start
-
+sudo ansible-playbook -v -c local playbook.yml -- refresh state

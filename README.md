@@ -51,4 +51,4 @@ stack together in a container.
 Alongside the ansible playbook you'll also find a short VagrantFile. This can
 be used to play with the stack with having to jump into Docker. However, I'm
 now using Docker for local development too and the VF is not guaranteed to
-be up to day.
+be up to date.

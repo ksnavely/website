@@ -6,7 +6,7 @@ for Vagrant are also included.
 
 ## Live it
 
-The site is live at https://kdevops.com. I have a goal to use a container service
+The site is live at http://kdevops.com. I have a goal to use a container service
 from Bluemix or AWS however I'm still working out the kinds with production
 container service. For now it's running sans Docker in an EC2 instance.
 

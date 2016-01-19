@@ -6,7 +6,7 @@ ADD website /srv/website/website
 ADD ansible /srv/ansible
 WORKDIR /srv/ansible
 
-RUN ansible-playbook playbook.yml -c local -v
+RUN ansible-playbook playbook.yml -c local -v -i hosts
 
 EXPOSE 22 80 5000
 

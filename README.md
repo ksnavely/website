@@ -4,6 +4,15 @@ This repo holds a web application stack I use for managing my website. I chose
 a stack based on Docker, Ansible, Nginx, and Python Flask is used. Some hooks
 for Vagrant are also included.
 
+## Live it
+
+The site is live at https://kdevops.com. I have a goal to use a container service
+from Bluemix or AWS however I'm still working out the kinds with production
+container service. For now it's running sans Docker in an EC2 instance.
+
+See the [provisioning guide](provision.md) and the [docker guide](docker.md).
+
+
 ## Stack
 
 I've strived to pick the right tool for the job at each layer of the stack.

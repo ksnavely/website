@@ -31,5 +31,6 @@ If you have the system set up, you can go ahead and start or update the machine'
 ```
 cd ~/website
 git pull --rebase origin master
-sudo ansible-playbook -v -c local -i ansible/hosts ansible/playbook.yml
+cd ansible
+sudo ansible-playbook -v -c local -i hosts website.yml
 ```

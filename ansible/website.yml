@@ -1,0 +1,9 @@
+---
+# file: website.yml
+# Defines the whole infrastructure for the website.
+- hosts: 127.0.0.1
+  sudo: yes
+  vars:
+    - git_email: "ksnavely@gmail.com"
+  roles: 
+    - website

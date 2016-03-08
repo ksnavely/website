@@ -1,7 +1,7 @@
 import website
+from website import accounts
 
 from flask import Flask, jsonify, render_template, request
-from werkzeug import exceptions
 
 
 def build_application():
@@ -42,21 +42,16 @@ def new_user():
       - password: the desired password
     """
     if not request.json:
-        raise exceptions.BadRequest("Request must include JSON content")
+        return jsonify({"error": "Request must include JSON content"}), 400
 
     username = request.json.get("username")
     password = request.json.get("password")
 
     if None in [username, password]:
-        raise exceptions.BadRequest(
-            "Request must include JSON username and password."
-        )
+        return jsonify({"error": "Request must include JSON username and password."}), 400
 
     ack = accounts.create_account(username, password)
     return jsonify({"created": ack.inserted_id}), 201
 
 if __name__ == "__main__":
     app.run()
-
-
-

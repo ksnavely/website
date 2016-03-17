@@ -5,42 +5,96 @@
     <title>Kyle Snavely</title>
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/blog.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 
   </head>
 
   <body>
 
-    <div class="topbar">
-      <div class="topbar-inner">
-        <div class="container-fluid">
-          <a class="brand" href="">Kyle Snavely</a>
-          <p class="pull-left">devops</p>
-          <p class="pull-right">powered by <a href="http://www.ansible.com/">ansible</a>, <a href="http://nginx.org/en/">nginx</a>, <a href="http://flask.pocoo.org/">flask</a>, and <a href="http://pingdom.com/">pingdom</a></p>
-        </div>
+      <div class="blog-header">
+        <h1 class="blog-title">kdevops</h1>
+        <p class="lead blog-description">Musing from deep within a tiny cloud. Powered by <a href="https://aws.amazon.com/">aws</a>, <a href="http://www.ansible.com/">ansible</a>, <a href="http://nginx.org/en/">nginx</a>, <a href="http://flask.pocoo.org/">flask</a>, <a href="https://getbootstrap.com/">bootstrap</a> and <a href="http://pingdom.com/">pingdom</a></p>
       </div>
-    </div>
 
-      <div class="content">
-        <div class="main_content">
-          <div id="page_area" class="page_area" style="margin: 0 auto;"> 
-            <div style="width: 33%; display: inline-block;"><a href="https://github.com/ksnavely"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/octocat.png') }}" /></a></div>
-            <div style="width: 33%; display: inline-block; margin: 0 auto;"><a href="rockfall/"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/rockfall_icon.png') }}" /></a></div>
-            <div style="width: 33%; display: inline-block; margin: 0 auto;"><a href="https://www.linkedin.com/pub/kyle-snavely/70/882/37"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/linkdin.png') }}" /></a></div>
+        <div class="container">
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+          {% if blog_posts %}
+              {% for post in blog_posts %}
+				  <div class="blog-post">
+					<h2 class="blog-post-title">{{ post.title }}</h2>
+					<p class="blog-post-meta">{{ post.date }} by <a href="#">{{ post.author }}</a></p>
+					{{ post.text|safe }}
+                  <p class="blog-post-meta">{% for t in post.tags %} {{ t }} {% endfor %}</p>
+				  </div><!-- /.blog-post --> 
+              {% endfor %} 
+          {% else %}
+			  No blogs to show today!
+          {% endif %}
+
+		  <nav>
+            <ul class="pager">
+              <li><a href="#">Previous</a></li>
+              <li><a href="#">Next</a></li>
+            </ul>
+          </nav>
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module">
+<a href="https://github.com/ksnavely"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/octocat.png') }}" /></a>
           </div>
-          <center>
-            <p>Would you like to play a game?</p>
-          </center>
+          <div class="sidebar-module">
+<a href="rockfall/"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/rockfall_icon.png') }}" /></a>
+          <div><center>Would you like to play a game?</center></div>
+          </div>
+          <div class="sidebar-module">
+<a href="https://www.linkedin.com/pub/kyle-snavely/70/882/37"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/linkdin.png') }}" /></a>
+          </div>
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">March 2014</a></li>
+              <li><a href="#">February 2014</a></li>
+              <li><a href="#">January 2014</a></li>
+              <li><a href="#">December 2013</a></li>
+              <li><a href="#">November 2013</a></li>
+              <li><a href="#">October 2013</a></li>
+              <li><a href="#">September 2013</a></li>
+              <li><a href="#">August 2013</a></li>
+              <li><a href="#">July 2013</a></li>
+              <li><a href="#">June 2013</a></li>
+              <li><a href="#">May 2013</a></li>
+              <li><a href="#">April 2013</a></li>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">GitHub</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Facebook</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
         </div>
 
-        <footer style="border: none">
-          <center>
-            <p style="font-size:0.8em">&copy; Kyle Snavely 2016</p>
-          </center>
-        </footer>
-      </div> <!-- End content div -->
-    </div>
-    <div id="mj-progress-div"></div>
+       <footer style="border: none">
+         <center>
+           <p style="font-size:0.8em">&copy; Kyle Snavely 2016</p>
+         </center>
+       </footer>
   </body>
 </html>

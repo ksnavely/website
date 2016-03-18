@@ -14,7 +14,7 @@
 
       <div class="blog-header">
         <h1 class="blog-title">kdevops</h1>
-        <p class="lead blog-description">Musing from deep within a tiny cloud. Powered by <a href="https://aws.amazon.com/">aws</a>, <a href="http://www.ansible.com/">ansible</a>, <a href="http://nginx.org/en/">nginx</a>, <a href="https://www.mongodb.org/">mongodb</a>, <a href="http://flask.pocoo.org/">flask</a>, <a href="https://getbootstrap.com/">bootstrap</a> and <a href="http://pingdom.com/">pingdom</a></p>
+        <p class="lead blog-description">Musings from deep within a tiny cloud. Powered by <a href="https://aws.amazon.com/">aws</a>, <a href="http://www.ansible.com/">ansible</a>, <a href="http://nginx.org/en/">nginx</a>, <a href="https://www.mongodb.org/">mongodb</a>, <a href="http://flask.pocoo.org/">flask</a>, <a href="https://getbootstrap.com/">bootstrap</a> and <a href="http://pingdom.com/">pingdom</a></p>
       </div>
 
         <div class="container">
@@ -28,7 +28,8 @@
 					<h2 class="blog-post-title">{{ post.title }}</h2>
 					<p class="blog-post-meta">{{ post.date }} by <a href="#">{{ post.author }}</a></p>
 					{{ post.text|safe }}
-                  <p class="blog-post-meta">{% for t in post.tags %} {{ t }} {% endfor %}</p>
+                  <p class="blog-post-meta">Tags: {% for t in post.tags %} {{ t }} {% endfor %}</p>
+
 				  </div><!-- /.blog-post --> 
               {% endfor %} 
           {% else %}
@@ -54,8 +55,8 @@
           <div class="sidebar-module">
             <h4>Archives</h4>
             <ol class="list-unstyled">
-              <li><a href="?date="2016-03"">March 2016</a></li>
-              <li><a href="?date="2016-04"">April 2016</a></li>
+              <li><a href="?date=2016-03">March 2016</a></li>
+              <li><a href="?date=2016-04">April 2016</a></li>
             </ol>
           </div>
         </div><!-- /.blog-sidebar -->

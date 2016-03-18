@@ -5,42 +5,71 @@
     <title>Kyle Snavely</title>
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/blog.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 
   </head>
 
   <body>
 
-    <div class="topbar">
-      <div class="topbar-inner">
-        <div class="container-fluid">
-          <a class="brand" href="">Kyle Snavely</a>
-          <p class="pull-left">devops</p>
-          <p class="pull-right">powered by <a href="http://www.docker.com/">docker</a>, <a href="http://www.ansible.com/">ansible</a>, <a href="http://nginx.org/en/">nginx</a>, and <a href="http://flask.pocoo.org/">flask</a></p>
-        </div>
+      <div class="blog-header">
+        <h1 class="blog-title">kdevops</h1>
+        <p class="lead blog-description">Musings from deep within a tiny cloud. Powered by <a href="https://aws.amazon.com/">aws</a>, <a href="http://www.ansible.com/">ansible</a>, <a href="http://nginx.org/en/">nginx</a>, <a href="https://www.mongodb.org/">mongodb</a>, <a href="http://flask.pocoo.org/">flask</a>, <a href="https://getbootstrap.com/">bootstrap</a> and <a href="http://pingdom.com/">pingdom</a></p>
       </div>
-    </div>
 
-      <div class="content">
-        <div class="main_content">
-          <div id="page_area" class="page_area" style="margin: 0 auto;"> 
-            <div style="width: 33%; display: inline-block;"><a href="https://github.com/ksnavely"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/octocat.png') }}" /></a></div>
-            <div style="width: 33%; display: inline-block; margin: 0 auto;"><a href="rockfall/"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/rockfall_icon.png') }}" /></a></div>
-            <div style="width: 33%; display: inline-block; margin: 0 auto;"><a href="https://www.linkedin.com/pub/kyle-snavely/70/882/37"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/linkdin.png') }}" /></a></div>
+        <div class="container">
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+          {% if blog_posts %}
+              {% for post in blog_posts %}
+				  <div class="blog-post">
+					<h2 class="blog-post-title">{{ post.title }}</h2>
+					<p class="blog-post-meta">{{ post.date }} by <a href="#">{{ post.author }}</a></p>
+					{{ post.text|safe }}
+                  <p class="blog-post-meta">Tags: {% for t in post.tags %} {{ t }} {% endfor %}</p>
+
+				  </div><!-- /.blog-post --> 
+              {% endfor %} 
+          {% else %}
+			  Couldn't find any blogs to show! :'( Try a different archive date or check out the cool links on the sidebar.
+          {% endif %}
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module">
+<a href="https://github.com/ksnavely"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/octocat.png') }}" /></a>
           </div>
-          <center>
-            <p>Would you like to play a game?</p>
-          </center>
+          <div class="sidebar-module">
+<a href="rockfall/"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/rockfall_icon.png') }}" /></a>
+          <div><center>Would you like to play a game?</center></div>
+          </div>
+          <div class="sidebar-module">
+<a href="https://www.linkedin.com/pub/kyle-snavely/70/882/37"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/linkdin.png') }}" /></a>
+          </div>
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p>I'm devops engineer and former nuclear physicist. My passion is software engineering -- Python, distributed systems, infrastructure as code, and oh, roguelikes too.</p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+              <li><a href="?date=2016-03">March 2016</a></li>
+              <li><a href="?date=2016-04">April 2016</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
         </div>
 
-        <footer style="border: none">
-          <center>
-            <p style="font-size:0.8em">&copy; Kyle Snavely 2016</p>
-          </center>
-        </footer>
-      </div> <!-- End content div -->
-    </div>
-    <div id="mj-progress-div"></div>
+       <footer style="border: none">
+         <center>
+           <p style="font-size:0.8em">&copy; Kyle Snavely 2016</p>
+         </center>
+       </footer>
   </body>
 </html>

@@ -17,7 +17,7 @@ def create_post(title, author, text, tags=None):
         "title": title,
         "author": author,
         "text": text,
-        "date": arrow.utcnow(),
+        "date": arrow.utcnow().for_json(),
         "tags": tags
     }
     return _get_blog_posts_collection().insert_one(post)

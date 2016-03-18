@@ -6,6 +6,9 @@ Create/read blog posts from a database.
 import arrow
 from pymongo import MongoClient as MC
 
+
+CLIENT = None
+
 # Public interface
 
 def create_post(title, author, text, tags=None):

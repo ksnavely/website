@@ -1,0 +1,28 @@
+    <div class="topbar">
+        {% if current_user.is_authenticated %}
+        <div class="pull-right topbar-right-controls">
+	 <form method="post" action="{{ url_for('logout') }}">
+          <input type="submit" class="topbar-form form-submit" value="Logout"/>
+	</form>
+        </div>
+        <div class="pull-right topbar-right-controls">
+	 <form method="get" action="{{ url_for('create_post') }}">
+          <input type="submit" class="topbar-form form-submit" value="New Post"/>
+	</form>
+        </div>
+        <div class="pull-right topbar-right-controls">
+	 <form method="get" action="{{ url_for('index') }}">
+          Welcome {{ current_user.id }}!
+          <input type="submit" class="topbar-form form-submit" value="Home"/>
+	</form>
+        </div>
+        {% else %}
+        <div class="pull-right topbar-right-controls">
+	 <form method="post" action="{{ url_for('login') }}">
+          <input type="text" class="topbar-form" name="username" placeholder="username" />
+          <input type="text" class="topbar-form" name="password" placeholder="password" />
+          <input type="submit" class="topbar-form form-submit" value="Login"/>
+	</form>
+        </div>
+        {% endif %}
+    </div>

@@ -15,7 +15,10 @@ def new_user():
     password = request.json.get("password")
 
     if None in [username, password]:
-        return jsonify({"error": "Request must include JSON username and password."}), 400
+        return jsonify(
+            {"error": "Request must include JSON username and password."}
+        ),
+        400
 
     ack = accounts.create_account(username, password)
     return jsonify({"created": ack.inserted_id}), 201

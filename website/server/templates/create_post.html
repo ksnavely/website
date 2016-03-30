@@ -16,27 +16,20 @@
 
       <div class="blog-header">
         <h1 class="blog-title">kdevops</h1>
-        <p class="lead blog-description">Musings from deep within a tiny cloud. Powered by <a href="https://aws.amazon.com/">aws</a>, <a href="http://www.ansible.com/">ansible</a>, <a href="http://nginx.org/en/">nginx</a>, <a href="https://www.mongodb.org/">mongodb</a>, <a href="http://flask.pocoo.org/">flask</a>, <a href="https://getbootstrap.com/">bootstrap</a> and <a href="http://pingdom.com/">pingdom</a>.</p>
+        <p class="lead blog-description">Admins can post new content using the form below.</p>
       </div>
 
         <div class="container">
-
+      
       <div class="row">
-
         <div class="col-sm-8 blog-main">
-          {% if blog_posts %}
-              {% for post in blog_posts %}
-				  <div class="blog-post">
-					<h2 class="blog-post-title">{{ post.title }}</h2>
-					<p class="blog-post-meta">{{ post.date }} by <a href="#">{{ post.author }}</a></p>
-					{{ post.text|safe }}
-                  <p class="blog-post-meta">Tags: {% for t in post.tags %} {{ t }} {% endfor %}</p>
-
-				  </div><!-- /.blog-post --> 
-              {% endfor %} 
-          {% else %}
-			  Couldn't find any blogs to show! :'( Try a different archive date or check out the cool links on the sidebar.
-          {% endif %}
+        	 <form method="post" action="{{ url_for('create_post_submit') }}" id="create_post_form">
+                  <label>Post title:</label><input type="text" class="create-post-form" name="title" placeholder="title..." /><br />
+                  <label>Author:</label><input type="text" class="create-post-form" name="author" value="{{ current_user.id }}" /><br />
+		  <label>Post content:</label><textarea form ="create_post_form" placeholder="text..." name="text" id="text" cols=40 rows=8 wrap="soft" class="create-post-form"></textarea><br />
+                  <label>Tags:</label><input type="text" class="create-post-form" name="tags" placeholder="comma separated tags..." /><br />
+                 <center><input type="submit" class="form-submit create-post-form-submit" value="Create Post"/></center>
+			</form>
         </div><!-- /.blog-main -->
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">

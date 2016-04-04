@@ -9,7 +9,9 @@ from pymongo import MongoClient as MC
 
 CLIENT = None
 
+
 # Public interface
+
 
 def create_post(title, author, text, tags=None):
     tags = tags or []
@@ -29,11 +31,11 @@ def get_posts(date=None):
         find like "2016-3"
     """
     if date:
-		cursor = _get_blog_posts_collection().find({"date": {"$regex": date}})
+        cursor = _get_blog_posts_collection().find({"date": {"$regex": date}})
     else:
-		cursor = _get_blog_posts_collection().find()
+        cursor = _get_blog_posts_collection().find()
 
-    blogs = list(cursor)
+    blogs = sorted(list(cursor), key=lambda x: x["date"], reverse=True)
     return blogs
 
 

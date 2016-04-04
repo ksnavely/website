@@ -27,10 +27,10 @@ CLIENT = None
 def create_account(username, password):
     hashed_pw = _get_hashed_password(password)
     doc = {
-              "_id": username,
-              "username": username,
-              "hashed_password": hashed_pw,
-              "signup_date": arrow.utcnow().timestamp
+        "_id": username,
+        "username": username,
+        "hashed_password": hashed_pw,
+        "signup_date": arrow.utcnow().timestamp
     }
     return _get_auth_collection().insert_one(doc)
 

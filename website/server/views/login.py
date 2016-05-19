@@ -1,7 +1,7 @@
 from flask import jsonify, redirect, request, url_for
 from flask.ext.login import login_required, login_user
 
-from website.accounts import authenticate
+from website.accounts import authenticate, get_account
 from website.server.authentication import User
 
 
@@ -12,22 +12,31 @@ def login():
     """
     validation_msg = "Login request must contain form encoded username and " \
                      "password fields, with string values."
+
     if not request.form:
         return jsonify({"error": validation_msg}), 401
 
+    username = request.form.get("username")
+    password = request.form.get("password")
+
     validated = all(
         [
-            isinstance(request.form.get("username"), basestring),
-            isinstance(request.form.get("password"), basestring)
+            isinstance(username, basestring),
+            isinstance(password, basestring)
         ]
     )
     if not validated:
         return jsonify({"error": validation_msg}), 401
 
-    user = User(request.form.get("username"))
+    failed_auth_msg = "Authentication failed."
 
-    if authenticate(user.id, request.form.get("password")):
+    if get_account(username) is None:
+        return jsonify({"error": failed_auth_msg}), 401
+
+    user = User(username)
+
+    if authenticate(user.id, password):
         login_user(user)
         return redirect(url_for("index", _external=True, _scheme="https"))
     else:
-        return jsonfiy({"error": "Authentication failed"}), 401
+        return jsonfiy({"error": failed_auth_msg}), 401

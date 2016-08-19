@@ -4,6 +4,7 @@ _blog_
 Create/read blog posts from a database.
 """
 import arrow
+from bson.objectid import ObjectId
 from pymongo import MongoClient as MC
 
 
@@ -37,6 +38,34 @@ def get_posts(date=None):
 
     blogs = sorted(list(cursor), key=lambda x: x["date"], reverse=True)
     return blogs
+
+
+def get_post(post_id):
+    """"
+    Get a single post.
+
+    :param str post_id: The mongo id for the blog post.
+
+    :returns: A dict of post attributes, or None if post_id is not
+        found in mongo.
+    """
+    post = _get_blog_posts_collection().find_one(
+        {"_id": ObjectId(post_id)}
+    ) 
+    return post
+
+
+def update_post(post_id, title, author, text, date, tags):
+    tags = tags or []
+    selector = {"_id": ObjectId(post_id)}
+    post = {
+        "title": title,
+        "author": author,
+        "text": text,
+        "date": date,
+        "tags": tags
+    }
+    return _get_blog_posts_collection().update_one(selector, {"$set": post})
 
 
 # Private interface

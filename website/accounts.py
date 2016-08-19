@@ -11,10 +11,6 @@ check passwords at authentication time.
 dispensed with a lot of the validation and niceties one might expect
 in production. Use at your own risk.
 """
-import hashlib
-import base64
-import uuid
-
 import arrow
 import bcrypt
 from pymongo import MongoClient as MC

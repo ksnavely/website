@@ -146,8 +146,13 @@ h6, .h6 {
   margin-bottom: 60px;
 }
 .blog-post-title {
+  display: inline-block;
   margin-bottom: 5px;
   font-size: 36px;
+}
+.blog-post-edit {
+  display: inline-block;
+  float: right;
 }
 .blog-post-meta {
   margin-bottom: 20px;

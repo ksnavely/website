@@ -1,5 +1,5 @@
 from flask import jsonify, redirect, request, url_for
-from flask.ext.login import login_required, login_user
+from flask.ext.login import login_user
 
 from website.accounts import authenticate, get_account
 from website.server.authentication import User
@@ -39,4 +39,4 @@ def login():
         login_user(user)
         return redirect(url_for("index", _external=True, _scheme="https"))
     else:
-        return jsonfiy({"error": failed_auth_msg}), 401
+        return jsonify({"error": failed_auth_msg}), 401

@@ -1,13 +1,13 @@
 import logging
 import sys
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask
 from flask.ext.login import LoginManager
 
 import website
 from website.config import get_config
 from website.server import authentication
-from website.server.views import account, frontpage, login, logout, version
+from website.server.views import frontpage, login, logout, version
 
 
 LOGGER = None
@@ -64,6 +64,8 @@ app.add_url_rule("/logout", "logout", logout.logout, methods=["POST"])
 app.add_url_rule("/version", "version", version.version, methods=["GET"])
 app.add_url_rule("/create_post", "create_post", frontpage.create_blog_entry, methods=["GET"])
 app.add_url_rule("/create_post", "create_post_submit", frontpage.create_blog_entry_submit, methods=["POST"])
+app.add_url_rule("/update_post/<post_id>", "update_post", frontpage.update_blog_entry, methods=["GET"])
+app.add_url_rule("/update_post/<post_id>", "update_post_submit", frontpage.update_blog_entry_submit, methods=["POST"])
 
 if __name__ == "__main__":
     app.run()

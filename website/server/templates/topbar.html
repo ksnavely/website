@@ -1,19 +1,20 @@
+    <div class="corner_img_div"><img src="{{ url_for('static',filename='images/corner.png') }}" /></div>
     <div class="topbar">
         {% if current_user.is_authenticated %}
         <div class="pull-right topbar-right-controls">
 	 <form method="post" action="{{ url_for('logout') }}">
-          <input type="submit" class="topbar-form form-submit" value="Logout"/>
+          <input type="submit" class="form-submit topbar-form" value="Logout"/>
 	</form>
         </div>
         <div class="pull-right topbar-right-controls">
 	 <form method="get" action="{{ url_for('create_post') }}">
-          <input type="submit" class="topbar-form form-submit" value="New Post"/>
+          <input type="submit" class="form-submit topbar-form" value="New Post"/>
 	</form>
         </div>
         <div class="pull-right topbar-right-controls">
 	 <form method="get" action="{{ url_for('index') }}">
           Welcome {{ current_user.id }}!
-          <input type="submit" class="topbar-form form-submit" value="Home"/>
+          <input type="submit" class="form-submit topbar-form" value="Home"/>
 	</form>
         </div>
         {% else %}
@@ -21,7 +22,7 @@
 	 <form method="post" action="{{ url_for('login') }}">
           <input type="text" class="topbar-form" name="username" placeholder="username" />
           <input type="text" class="topbar-form" name="password" placeholder="password" />
-          <input type="submit" class="topbar-form form-submit" value="Login"/>
+          <input type="submit" class="form-submit topbar-form" value="Login"/>
 	</form>
         </div>
         {% endif %}

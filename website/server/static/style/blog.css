@@ -4,6 +4,16 @@
 
 body {
   color: #555;
+  background-repeat: no-repeat;
+}
+
+.header-hr {
+  width: 50%
+}
+
+.corner_img_div {
+  float: left;
+  position: absolute;
 }
 
 h1, .h1,
@@ -176,8 +186,10 @@ h6, .h6 {
 }
 
 .topbar {
+  background-color: #f9f9f9;
+  border-bottom: solid 1px #ccc;
   padding: 5px;
-  height: 36px;
+  height: 34px;
 }
 
 .topbar-right-controls {
@@ -186,7 +198,6 @@ h6, .h6 {
 }
 
 .form-submit {
-    background:#FFF;
     color:#337AB7;
     border: 0px solid #555;
     padding: 3px;

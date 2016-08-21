@@ -26,16 +26,17 @@
         <div class="col-sm-8 blog-main">
           {% if blog_posts %}
               {% for post in blog_posts %}
-				  <div class="blog-post">
-					<h2 class="blog-post-title">{{ post.title }}</h2>
-					<p class="blog-post-meta">{{ post.date }} by <a href="#">{{ post.author }}</a></p>
-					{{ post.text|safe }}
+                  <div class="blog-post">
+                    <div class="blog-post-title"><h2>{{ post.title }}</h2></div>
+                    {% if current_user.is_authenticated %}<div class="blog-post-edit"><a href="{{ url_for('update_post', post_id=post._id) }}">Edit</a></div>{% endif %}
+                    <p class="blog-post-meta">{{ post.date }} by <a href="#">{{ post.author }}</a></p>
+                    {{ post.text|safe }}
                   <p class="blog-post-meta">Tags: {% for t in post.tags %} {{ t }} {% endfor %}</p>
 
-				  </div><!-- /.blog-post --> 
+                  </div><!-- /.blog-post --> 
               {% endfor %} 
           {% else %}
-			  Couldn't find any blogs to show! :'( Try a different archive date or check out the cool links on the sidebar.
+              Couldn't find any blogs to show! :'( Try a different archive date or check out the cool links on the sidebar.
           {% endif %}
         </div><!-- /.blog-main -->
 

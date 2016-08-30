@@ -54,29 +54,7 @@
           </div><!-- /.blog-post-preview -->
         </div><!-- /.blog-main -->
 
-        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-          <div class="sidebar-module">
-<a href="https://github.com/ksnavely"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/octocat.png') }}" /></a>
-          </div>
-          <div class="sidebar-module">
-<a href="rockfall/"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/rockfall_icon.png') }}" /></a>
-          <div><center>Would you like to play a game?</center></div>
-          </div>
-          <div class="sidebar-module">
-<a href="https://www.linkedin.com/pub/kyle-snavely/70/882/37"><img style="margin: 0 auto; display: block;" src="{{ url_for('static',filename='images/linkdin.png') }}" /></a>
-          </div>
-          <div class="sidebar-module sidebar-module-inset">
-            <h4>About</h4>
-            <p>I'm a devops engineer and former nuclear physicist. My passion is software engineering -- Erlang, Python, distributed systems, infrastructure as code, and oh, roguelikes too.</p>
-          </div>
-          <div class="sidebar-module">
-            <h4>Archives</h4>
-            <ol class="list-unstyled">
-              <li><a href="?date=2016-03">March 2016</a></li>
-              <li><a href="?date=2016-04">April 2016</a></li>
-            </ol>
-          </div>
-        </div><!-- /.blog-sidebar -->
+      {% include 'sidebar.html' %}
 
       </div><!-- /.row -->
 

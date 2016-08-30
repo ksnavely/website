@@ -6,7 +6,7 @@ from flask.ext.login import LoginManager
 
 import website
 from website.config import get_config
-from website.server import authentication
+from website.server import authentication, utils
 from website.server.views import frontpage, login, logout, version
 
 
@@ -45,10 +45,14 @@ def setup_logging(app):
 
     @app.errorhandler(Exception)
     def exception_handler(error):
-        LOGGER.error("Unexpected error: {0}".format(error))
+        LOGGER.exception("Unexpected error: {0}".format(error))
         return "Server Error", 500
 
     LOGGER.debug("website: logging initiated")
+
+
+def setup_jinja_globals(app):
+    app.jinja_env.globals.update(archive_dates=utils.archive_dates)
 
 
 #
@@ -57,6 +61,7 @@ def setup_logging(app):
 
 app = build_application()
 setup_logging(app)
+setup_jinja_globals(app)
 
 app.add_url_rule("/", "index", frontpage.index, methods=["GET"])
 app.add_url_rule("/login", "login", login.login, methods=["POST"])

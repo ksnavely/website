@@ -19,14 +19,9 @@
             <center>
             <h4>Archives</h4>
             <ol class="list-unstyled">
-              <li><a href="?date=2016-03">March 2016</a></li>
-              <li><a href="?date=2016-04">April 2016</a></li>
-              <li><a href="?date=2016-05">May 2016</a></li>
-              <li><a href="?date=2016-06">June 2016</a></li>
-              <li><a href="?date=2016-07">July 2016</a></li>
-              <li><a href="?date=2016-08">August 2016</a></li>
-              <li><a href="?date=2016-09">September 2016</a></li>
-              <li><a href="?date=2016-10">October 2016</a></li>
+              {% for (y, m, m_name) in archive_dates() %}
+                <li><a href="?date={{ y }}-{{ m }}">{{ m_name }} {{ y }}</a></li>
+              {% endfor %}
             </ol>
             </center>
           </div>

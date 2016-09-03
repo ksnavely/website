@@ -150,6 +150,15 @@ h6, .h6 {
 .blog-post {
   margin-bottom: 60px;
 }
+.blog-post img {
+    margin: 30px auto;
+    display: block;
+}
+.blog-post iframe {
+    margin: 30px auto;
+    display: block;
+}
+
 .blog-post-preview {
   display: none;
   margin-top: 60px;
@@ -159,6 +168,11 @@ h6, .h6 {
     margin: 30px auto;
     display: block;
 }
+.blog-post-preview iframe {
+    margin: 30px auto;
+    display: block;
+}
+
 .blog-post-title {
   display: inline-block;
   margin-bottom: 5px;
@@ -243,8 +257,3 @@ input, textarea {
 }
 
 textarea { vertical-align: top; }
-
-.blog-post img {
-    margin: 30px auto;
-    display: block;
-}

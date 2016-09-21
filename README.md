@@ -1,5 +1,7 @@
 # website
 
+![build status](https://travis-ci.org/ksnavely/website.svg?branch=develop)
+
 This repo contains a basic flask server for my personal website. It's meant to be served behind a proxy server and is pretty straightforward.
 
 Currently this website is served at http://www.kdevops.com

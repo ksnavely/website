@@ -5,7 +5,7 @@ Create/read blog posts from a database.
 """
 import arrow
 from bson.objectid import ObjectId
-from pymongo import MongoClient as MC
+from pymongo import MongoClient as MongoClient
 
 
 CLIENT = None
@@ -74,7 +74,7 @@ def update_post(post_id, title, author, text, date, tags):
 def _client():
     global CLIENT
     if CLIENT is None:
-        CLIENT = MC()
+        CLIENT = MongoClient()
     return CLIENT
 
 

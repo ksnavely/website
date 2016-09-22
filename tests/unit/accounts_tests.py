@@ -47,3 +47,55 @@ class AccountTests(unittest.TestCase):
         self.assertTrue(accounts.authenticate(user, password))
 
         m_get_account.assert_called_once_with(user)
+
+    @mock.patch("website.accounts.arrow.utcnow")
+    @mock.patch("website.accounts._get_hashed_password")
+    @mock.patch("website.accounts._create_account")
+    def create_account_test(
+        self,
+        m_c_account,
+        m_get_hashed,
+        m_utc
+    ):
+        """
+        Cover the account creation path.
+        """
+        ack = "some id"
+        m_c_account.return_value = ack
+
+        hashed = "muh hash"
+        m_get_hashed.return_value = hashed
+
+        timestamp = 12
+        utc = mock.Mock()
+        type(utc).timestamp = timestamp
+        m_utc.return_value = utc
+
+        username = "some user"
+        password = "some pass"
+
+        expected =  {
+			"_id": username,
+			"username": username,
+			"hashed_password": hashed,
+			"signup_date": timestamp
+		}
+
+        ret = accounts.create_account(username, password)
+
+        self.assertEqual(ack, ret)
+        m_c_account.assert_called_once_with(expected)
+        m_get_hashed.assert_called_once_with(password)
+
+    @mock.patch("website.accounts._get_auth_collection")
+    def get_account_test(self, m_g_auth_collection):
+        username = "some user"
+        ret = "some mongo cursor"
+
+        ac = mock.Mock()
+        ac.find_one = mock.Mock(return_value=ret)
+        m_g_auth_collection.return_value = ac
+
+        self.assertEqual(ret, accounts._get_account(username))
+
+        ac.find_one.assert_called_once_with({"_id": username})

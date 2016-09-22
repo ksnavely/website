@@ -13,7 +13,7 @@ in production. Use at your own risk.
 """
 import arrow
 import bcrypt
-from pymongo import MongoClient as MC
+from pymongo import MongoClient as MongoClient
 
 CLIENT = None
 
@@ -55,7 +55,7 @@ def authenticate(username, password):
 def _client():
     global CLIENT
     if CLIENT is None:
-        CLIENT = MC()
+        CLIENT = MongoClient()
     return CLIENT
 
 

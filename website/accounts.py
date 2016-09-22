@@ -28,7 +28,7 @@ def create_account(username, password):
         "hashed_password": hashed_pw,
         "signup_date": arrow.utcnow().timestamp
     }
-    return _get_auth_collection().insert_one(doc)
+    return _create_account(doc)
 
 
 def update_account(username, updates):
@@ -73,6 +73,10 @@ def _check_password(plain_text_password, hashed_password):
 
 def _get_account(username):
     return _get_auth_collection().find_one({"_id": username})
+
+
+def _create_account(acct_doc):
+    return _get_auth_collection().insert_one(acct_doc)
 
 
 def _update_account(username, contents):

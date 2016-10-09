@@ -53,7 +53,7 @@ class BlogTests(unittest.TestCase):
             post["text"],
             tags=tags
         )
-       
+
         cursor.insert_one.assert_called_once_with(post)
 
     @mock.patch("website.blog._get_blog_posts_collection")
@@ -66,11 +66,62 @@ class BlogTests(unittest.TestCase):
         cursor = mock.Mock()
         cursor.find = mock.Mock(return_value=posts)
         m_g_collection.return_value = cursor
-        
+
         ret_posts = blog.get_posts()
 
         # Verify reverse date sort
         self.assertEqual([posts[1], posts[0]], ret_posts)
+
+        cursor.find.assert_called_once_with()
+
+    @mock.patch("website.blog._get_blog_posts_collection")
+    def get_posts_count_test(self, m_g_collection):
+        """
+        Test the get_posts functionality with count.
+        """
+        posts = [{"date": 1}, {"date": 2}]
+        cursor = mock.Mock()
+        cursor.find = mock.Mock(return_value=posts)
+        m_g_collection.return_value = cursor
+
+        ret_posts = blog.get_posts(count=1)
+
+        # Verify reverse date sort
+        self.assertEqual([posts[1]], ret_posts)
+
+        cursor.find.assert_called_once_with()
+
+    @mock.patch("website.blog._get_blog_posts_collection")
+    def get_posts_skip_test(self, m_g_collection):
+        """
+        Test the get_posts functionality with skip.
+        """
+        posts = [{"date": 1}, {"date": 2}]
+        cursor = mock.Mock()
+        cursor.find = mock.Mock(return_value=posts)
+        m_g_collection.return_value = cursor
+
+        ret_posts = blog.get_posts(skip=1)
+
+        # Verify reverse date sort
+        self.assertEqual([posts[0]], ret_posts)
+
+        cursor.find.assert_called_once_with()
+
+    @mock.patch("website.blog._get_blog_posts_collection")
+    def get_posts_count_skip_test(self, m_g_collection):
+        """
+        Test the get_posts functionality with count and skip.
+        """
+        posts = [{"date": 1}, {"date": 2}, {"date": 3}]
+        cursor = mock.Mock()
+        cursor.find = mock.Mock(return_value=posts)
+        m_g_collection.return_value = cursor
+
+        ret_posts = blog.get_posts(count=1, skip=1)
+
+        # Verify reverse date sort
+        self.assertEqual([posts[1]], ret_posts)
 
         cursor.find.assert_called_once_with()
 
@@ -84,8 +135,8 @@ class BlogTests(unittest.TestCase):
         cursor = mock.Mock()
         cursor.find = mock.Mock(return_value=posts)
         m_g_collection.return_value = cursor
-        
-        ret_posts = blog.get_posts(date)
+
+        ret_posts = blog.get_posts(date=date)
 
         # Verify reverse date sort
         self.assertEqual([posts[1], posts[0]], ret_posts)
@@ -104,7 +155,7 @@ class BlogTests(unittest.TestCase):
         m_g_collection.return_value = cursor
 
         post_id = 17
-        
+
         ret_post = blog.get_post(post_id)
 
         self.assertEqual(post, ret_post)
@@ -140,7 +191,7 @@ class BlogTests(unittest.TestCase):
             post["date"],
             post["tags"]
         )
-       
+
         cursor.update_one.assert_called_once_with(
             {"_id": obj_id},
             {"$set": post}

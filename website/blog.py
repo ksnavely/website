@@ -26,17 +26,31 @@ def create_post(title, author, text, tags=None):
     return _get_blog_posts_collection().insert_one(post)
 
 
-def get_posts(date=None):
+def get_posts(count=None, date=None, skip=None):
     """
+    Return all blog posts, sorted by date. A basic pagination is available
+    via the count and skip parameters.
+
+    The date and count/skip features are mutually exlusive.
+
+    :param int count: How many posts to return.
     :param str date: A date substring for a regex used in the mongo
         find like "2016-3"
+    :param int skip: The number of date sorted posts to skip before returning count posts.
     """
-    if date:
+    if date is not None:
         cursor = _get_blog_posts_collection().find({"date": {"$regex": date}})
     else:
         cursor = _get_blog_posts_collection().find()
 
     blogs = sorted(list(cursor), key=lambda x: x["date"], reverse=True)
+
+    if date is None:
+        if skip is not None:
+            blogs = blogs[skip:]
+        if count is not None:
+            blogs = blogs[:count]
+
     return blogs
 
 

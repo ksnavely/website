@@ -36,6 +36,7 @@
 
                   </div><!-- /.blog-post --> 
               {% endfor %} 
+              <div class="pagination-link"><a href="?count={{ count }}&skip={{ skip + blog_posts|length }}">Older Posts</a></div>
           {% else %}
               Couldn't find any blogs to show! :'( Try a different archive date or check out the cool links on the sidebar.
           {% endif %}

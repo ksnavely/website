@@ -1,19 +1,41 @@
+import arrow
 from flask import redirect, render_template, request, url_for
 from flask.ext.login import login_required
 
 from website import blog
 
+
+COUNT = 5
 REQUIRED_CREATE_FIELDS = ["title", "tags", "text", "author"]
 REQUIRED_UPDATE_FIELDS = ["title", "tags", "text", "author", "date"]
+SKIP = 0
+
 
 def index():
     """
     Returns the frontpage.
     """
+    count = request.args.get("count", COUNT)
     date = request.args.get("date")
+    skip = request.args.get("skip", SKIP)
+
+    try:
+        if count is not None:
+            count = int(count)
+        if skip is not None:
+            skip = int(skip)
+        if date is not None:
+            arrow.get(date)
+    except ValueError:
+        return ("Invalid count or skip specified.", 400)
+    except arrow.parser.ParserError:
+        return ("Invalid date specified.", 400)
+
     return render_template(
         'index.html',
-        blog_posts=blog.get_posts(date=date)
+        blog_posts=blog.get_posts(count=count, date=date, skip=skip),
+        count=count,
+        skip=skip
     )
 
 

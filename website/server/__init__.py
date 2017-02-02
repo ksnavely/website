@@ -69,6 +69,7 @@ app.add_url_rule("/logout", "logout", logout.logout, methods=["POST"])
 app.add_url_rule("/version", "version", version.version, methods=["GET"])
 app.add_url_rule("/create_post", "create_post", frontpage.create_blog_entry, methods=["GET"])
 app.add_url_rule("/create_post", "create_post_submit", frontpage.create_blog_entry_submit, methods=["POST"])
+app.add_url_rule("/<post_id>", "get_post", frontpage.get_blog_entry, methods=["GET"])
 app.add_url_rule("/update_post/<post_id>", "update_post", frontpage.update_blog_entry, methods=["GET"])
 app.add_url_rule("/update_post/<post_id>", "update_post_submit", frontpage.update_blog_entry_submit, methods=["POST"])
 

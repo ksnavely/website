@@ -39,6 +39,24 @@ def index():
     )
 
 
+def get_blog_entry(post_id):
+    """
+    Render a single blog post.
+
+    :param str post_id: The blog post mongo id
+    """
+    post = blog.get_post(post_id)
+
+    if post is not None:
+        post["_id"] = post_id  # don't render the objectid
+
+    return render_template(
+        'get_post.html',
+        post=post
+    )
+
+
+@login_required
 def create_blog_entry():
     """
     View the new blog post page.
@@ -48,6 +66,7 @@ def create_blog_entry():
     )
 
 
+@login_required
 def update_blog_entry(post_id):
     """
     View the update-blog-post page.
@@ -55,10 +74,10 @@ def update_blog_entry(post_id):
     :param str post_id: The blog post mongo id
     """
     post = blog.get_post(post_id)
-    if post is None:
-        return ("Post id: {0} not found.".format(post_id), 404)
 
-    post["_id"] = post_id  # don't render the objectid
+    if post is not None:
+        post["_id"] = post_id  # don't render the objectid
+
     return render_template(
         'update_post.html',
         post=post

@@ -9,7 +9,7 @@
         $('#preview-post').bind('click', function() {
           $('#preview-title').text($('#title').val());
           now = new Date().toLocaleString();
-          $('#preview-date-author').html(now + " by <a href='#'>" + $('#author').val() + "</a>");
+          $('#preview-date-author').html(now + " by " + $('#author').val());
           $('#preview-text').html($('#text').val());
           $('#preview-tags').text("Tags: " + $('#tags').val());
           $('#blog-post-preview').show()

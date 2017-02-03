@@ -63,13 +63,20 @@ def get_post(post_id):
     :returns: A dict of post attributes, or None if post_id is not
         found in mongo.
     """
-    post = _get_blog_posts_collection().find_one(
-        {"_id": ObjectId(post_id)}
-    ) 
+    if ObjectId.is_valid(post_id):
+        post = _get_blog_posts_collection().find_one(
+            {"_id": ObjectId(post_id)}
+        )
+    else:
+        post = None
+
     return post
 
 
 def update_post(post_id, title, author, text, date, tags):
+    if not ObjectId.is_valid(post_id):
+        raise Exception("blog.update_post: Invalid post_id.")
+
     tags = tags or []
     selector = {"_id": ObjectId(post_id)}
     post = {
